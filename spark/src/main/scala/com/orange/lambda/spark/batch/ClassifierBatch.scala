@@ -18,7 +18,7 @@ class ClassifierBatch(fetchData : FetchData) extends Batch {
       LOG.error("Nothing to Classify...")
       return
     }
-    LOG.error("classify text...")
+    LOG.info("classify text...")
     TextAnalyzer.classify(MLMapper.fitDataFrame(dataframe))
 
   }

@@ -10,7 +10,7 @@ object HdfsFetch extends Fetch {
   val log = LogManager.getLogger("hdfsFetch")
 
   override def fetchData(session: SparkSession, address: String): DataFrame = {
-  log.error("trying fetching data to " + address)
+  log.info("trying fetching data to " + address)
   try{
 
     session.read.schema(DcatDataModel.dcatSchema).json(address)

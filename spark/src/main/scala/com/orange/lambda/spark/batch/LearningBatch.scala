@@ -16,7 +16,7 @@ class LearningBatch(fetchData: FetchData) extends Batch {
       LOG.error("Nothing to Learn...")
       return
     }
-    LOG.error("Learning from text...")
+    LOG.info("Learning from text...")
 
     TextAnalyzer.fit(MLMapper.fitDataFrame(dataframe))
   }
