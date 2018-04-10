@@ -4,7 +4,7 @@ Simple spark architecture to compute batch on hdfs file source.
 
 ## Architecture
 
-![semantic-architecture](https://raw.githubusercontent.com/cesarcolle/spark-semantic/blob/develop/doc/semactic-architecture.png)
+![semantic-architecture](doc/semantic-architecture.png)
 
 ## Stack
 
