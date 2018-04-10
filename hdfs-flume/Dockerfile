@@ -1,14 +1,13 @@
 FROM develar/java:8u45
 
-ENV http_proxy="http://10.193.21.110:8080"
-ENV https_proxy="https://10.193.21.110:8080"
-
+# Proxy setting...
+# ENV http_proxy="http://10.10.10.10:8080"
+# ENV https_proxy="https://10.10.10.10:8080"
+# RUN echo "http_proxy=$http_proxy/" >> /etc/wgetrc
+# RUN echo "use_proxy=on" >> /etc/wgetrc
 
 ENV FLUME_VERSION 1.8.0
 ENV FLUME_HOME /opt/lib/flume
-
-RUN echo "http_proxy=$http_proxy/" >> /etc/wgetrc
-RUN echo "use_proxy=on" >> /etc/wgetrc
 
 
 RUN mkdir -p /opt/lib && \

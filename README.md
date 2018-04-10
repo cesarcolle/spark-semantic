@@ -21,8 +21,13 @@ Distribued file system to store all the data our system want to ingest. Allow us
 Spark allow batch to be compute in RAM. It's has best performance with machine learning algorithm.
 
 ## Start the project
+1. package
 
-You can start the project with
+Automatic package isn't available for spark. please :
+
+    cd spark && sbt package 
+
+2. You can start the project with
  
     docker-compose up
 

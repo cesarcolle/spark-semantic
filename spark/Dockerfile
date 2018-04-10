@@ -1,4 +1,3 @@
-#FROM hseeberger/scala-sbt as builder
 
 FROM bde2020/spark-base:2.3.0-hadoop2.7
 

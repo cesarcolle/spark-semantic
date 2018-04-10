@@ -71,7 +71,7 @@ services:
   submitting:
     container_name: submitting
     build:
-      context: odbo-spark
+      context: spark
     links:
       - spark-master
     depends_on:
