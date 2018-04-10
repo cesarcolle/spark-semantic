@@ -1,0 +1,126 @@
+version : '3'
+services:
+
+# SPARK
+
+  spark-master:
+    image: bde2020/spark-master:2.3.0-hadoop2.7
+    container_name: spark-master
+    ports:
+     - "8080:8080"
+     - "7077:7077"
+    environment:
+     - INIT_DAEMON_STEP=setup_spark
+     - HOSTNAME_NAMENODE=hdfs-namenode:9000
+
+  spark-worker:
+    image: bde2020/spark-worker:2.3.0-hadoop2.7
+    container_name: spark-worker-1
+    depends_on:
+      - spark-master
+    ports:
+      - "8081:8081"
+    environment:
+      - "SPARK_MASTER=spark://spark-master:7077"
+
+# HDFS
+
+  hdfs-namenode:
+    container_name: hdfs-namenode
+    image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
+    environment:
+      - CLUSTER_NAME=odbo-cluster
+    env_file:
+      - ./hadoop.env
+    ports:
+      - "50070:50070"
+      - "9000:9000"
+
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
+    env_file:
+      - ./hadoop.env
+    environment:
+      SERVICE_PRECONDITION: "hdfs-namenode:50070"
+
+# KAFKA
+  kafka :
+    container_name: kafka
+    image : spotify/kafka
+    ports:
+      - "9092:9092"
+      - "2181:2181"
+    volumes:
+      - ./kafka:/home/kafka
+    environment:
+      - TOPICS=open-data-orange
+      - ADVERTISED_HOST=kafka
+      - ADVERTISED_PORT=9092
+
+# FLUME
+  flume :
+    container_name: flume
+    build:
+      context: hdfs-flume
+    links:
+      - kafka
+      - hdfs-namenode
+
+# STORM CLUSTER
+  zookeeper:
+      image: zookeeper
+      container_name: zookeeper-storm
+
+  nimbus:
+    image: storm
+    command: storm nimbus
+    container_name: nimbus
+    depends_on:
+        - zookeeper
+    links:
+        - zookeeper
+    ports:
+        - "6627:6627"
+        - "8085:8080"
+
+  supervisor:
+    build:
+      context: storm
+    container_name: supervisor
+    volumes:
+      - ./storm/:/home/storm/
+    depends_on:
+        - nimbus
+        - zookeeper
+    links:
+        - nimbus
+        - zookeeper
+        - kafka
+    ports:
+      - "8089:8080"
+    environment :
+      - KAFKA_HOST="kafka:9092"
+      - WORKDIR=/home/storm
+
+# MONGODB
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    ports:
+      - 27017:27017
+      - 28017:28017
+
+# SUBMIT SPARK BATCH
+  submitting:
+    container_name: submitting
+    build:
+      context: odbo-spark
+    links:
+      - spark-master
+    depends_on:
+      - spark-master
+    environment:
+      - HOSTNAME_NAMENODE=hdfs-namenode:9000

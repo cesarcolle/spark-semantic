@@ -1,0 +1,21 @@
+<settings>
+
+    <proxies>
+        <proxy>
+            <id>http-proxy</id>
+            <active>true</active>
+            <protocol>http</protocol>
+            <host>10.193.21.110</host>
+            <port>8080</port>
+        </proxy>
+
+        <proxy>
+            <id>https-proxy</id>
+            <active>true</active>
+            <protocol>https</protocol>
+            <host>10.193.21.110</host>
+            <port>8080</port>
+        </proxy>
+    </proxies>
+
+</settings>
