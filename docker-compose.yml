@@ -31,7 +31,7 @@ services:
     environment:
       - CLUSTER_NAME=odbo-cluster
     env_file:
-      - ./hadoop.env
+      - hfds-conf/hadoop.env
     ports:
       - "50070:50070"
       - "9000:9000"
@@ -39,7 +39,7 @@ services:
   datanode:
     image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
     env_file:
-      - ./hadoop.env
+      - hfds-conf/hadoop.env
     environment:
       SERVICE_PRECONDITION: "hdfs-namenode:50070"
 

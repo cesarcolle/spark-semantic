@@ -1,4 +1,4 @@
-package com.orange.lambda.spark.mapper
+package semantic.mapper
 
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions._

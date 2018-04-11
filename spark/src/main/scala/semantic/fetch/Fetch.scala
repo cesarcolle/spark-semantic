@@ -1,4 +1,4 @@
-package com.orange.lambda.spark.fetch
+package semantic.fetch
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 

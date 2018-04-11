@@ -3,7 +3,7 @@
 set -e
 
 
-export FLUME_AGENT_NAME=odboagent
+export FLUME_AGENT_NAME=flumeagent
 
 FLUME_CONF_DIR=${FLUME_CONF_DIR:-/opt/lib/flume/conf}
 FLUME_CONF_FILE=${FLUME_CONF_FILE:-/opt/lib/flume/conf/flume-conf.properties}
@@ -12,4 +12,4 @@ FLUME_CONF_FILE=${FLUME_CONF_FILE:-/opt/lib/flume/conf/flume-conf.properties}
 
 echo "Starting flume agent : ${FLUME_AGENT_NAME}"
 
-$FLUME_HOME/bin/flume-ng agent -c /opt/flume/conf/ -f /opt/flume/conf/flume-conf.properties -n odboagent
+$FLUME_HOME/bin/flume-ng agent -c /opt/flume/conf/ -f /opt/flume/conf/flume-conf.properties -n $FLUME_AGENT_NAME

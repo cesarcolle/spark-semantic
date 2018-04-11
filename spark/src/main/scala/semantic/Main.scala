@@ -1,12 +1,12 @@
-package com.orange.lambda.spark
+package semantic
 
 
-import com.orange.lambda.spark.batch.{ClassifierBatch, LearningBatch, OrderingBatch}
-import com.orange.lambda.spark.engine.BatchHdfsEngine
-import com.orange.lambda.spark.fetch.FetchBuilder
-import com.orange.lambda.spark.fetch.FetchBuilder.Fetch.EmptyFetch
 import org.apache.log4j.{Level, LogManager}
 import org.apache.spark.sql.SparkSession
+import semantic.batch.{ClassifierBatch, LearningBatch, OrderingBatch}
+import semantic.engine.BatchHdfsEngine
+import semantic.fetch.FetchBuilder
+import semantic.fetch.FetchBuilder.Fetch.EmptyFetch
 
 object Main {
 

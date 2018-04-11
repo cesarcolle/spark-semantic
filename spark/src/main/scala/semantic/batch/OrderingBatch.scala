@@ -1,6 +1,8 @@
-package com.orange.lambda.spark.batch
-import com.orange.lambda.spark.fetch.FetchData
+package semantic.batch
+
 import org.apache.log4j.{LogManager, Logger}
+import semantic.fetch.FetchData
+
 class OrderingBatch(fetchData: FetchData) extends Batch {
 
   override val fetch: FetchData = fetchData
@@ -8,7 +10,7 @@ class OrderingBatch(fetchData: FetchData) extends Batch {
 
   override def launch(): Unit = {
     val dataframe = fetch.fetch()
-    if (dataframe.count() < 1){
+    if (dataframe.count() < 1) {
       LOG.error("Nothing to Order...")
       return
     }

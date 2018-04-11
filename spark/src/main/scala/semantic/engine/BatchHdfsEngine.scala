@@ -1,6 +1,6 @@
-package com.orange.lambda.spark.engine
+package semantic.engine
 
-import com.orange.lambda.spark.batch.Batch
+import semantic.batch.Batch
 
 class BatchHdfsEngine(batchList: List[Batch]) {
 
